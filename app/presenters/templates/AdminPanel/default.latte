@@ -1,0 +1,64 @@
+{extends "@admin.latte"}
+{block title}Admin Panel{/block}
+
+
+{block content}
+    <div class="row my-2">
+        <div class="card col">
+            <div class="row p-4">
+                <section class="col-sm d-flex flex-column p-2">
+                    <h2>Пользователи</h2>
+                    <a n:href="users">Пользователи</a>
+                    <a n:href="promo">Промо-коды</a>
+                </section>
+                <section class="col-sm d-flex flex-column p-2">
+                    <h2>Новости</h2>
+                    <a n:href="news">Список новостей</a>
+                    <a n:href="addnews">Добавить новость</a>
+                </section>
+                <section class="col-sm d-flex flex-column p-2">
+                    <h2>Атаки</h2>
+                    <a n:href="attacks">Список атак</a>
+                    <a n:href="methods">Методы атак</a>
+                    <a n:href="methods, -1">Создать метод атаки</a>
+                </section>
+                <section class="col-sm d-flex flex-column p-2">
+                    <h2>Сервера</h2>
+                    <a n:href="servers">Список серверов</a>
+                    <a n:href="servers, -1">Новый сервер</a>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col card p-4">
+            <div class="card-header">
+                <h2>CloudShield</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="table-responsive" style="overflow: auto;">
+                            <img id="inf" src="https://graf-img.cloud-shield.ru/render/{$conf->CloudShield['requests']}/700x500" />
+                            <script>
+                                setInterval(_ => {
+                                $("#inf").get(0).src="https://graf-img.cloud-shield.ru/render/{$conf->CloudShield['requests']|noescape}/700x500?a="+btoa(Date.now());
+                                },10000);
+                            </script>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="table-responsive" style="overflow: auto;">
+                            <img id="inf2" src="https://graf-img.cloud-shield.ru/render/{$conf->CloudShield['geo']}/700x500" />
+                            <script>
+                                setInterval(_ => {
+                                    $("#inf2").get(0).src="https://graf-img.cloud-shield.ru/render/{$conf->CloudShield['geo']|noescape}/700x500?a="+btoa(Date.now());
+                                },10000);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

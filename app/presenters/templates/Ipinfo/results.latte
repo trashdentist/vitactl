@@ -1,0 +1,35 @@
+{extends "../Dashboard/@hub.latte"}
+{block title}Check URL{/block}
+
+
+{block content}
+    <div class="row">
+        <div class="p-4 m-1 card">
+            <h1>IP Info</h1>
+            <div class="table-responsive" style="overflow: auto;">
+                <table class="table tablesorter">
+                    <thead class="text-primary">
+                        <tr>
+                            <th>Key</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hostname</td>
+                            <td>{$info->hostname}</td>
+                        </tr>
+                        <tr>
+                            <td>Type</td>
+                            <td>{$info->type}</td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td>{$info->city}, <img src="{$info->location->country_flag}" alt="Country" style="max-width:32px;" /> {$info->country_name}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{/block}

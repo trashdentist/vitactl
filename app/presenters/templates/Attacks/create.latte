@@ -1,0 +1,14 @@
+{extends "../Dashboard/@hub.latte"}
+{block title}Attack Hub{/block}
+
+{block content}
+    <div class="card m-1 p-4">
+        <h1 class="bg-gay p-2 rounded">Attack Hub</h1>
+        <div class="row">
+            <div class="col-lg bg-gay m-3 p-2 rounded">
+                {control attackForm}
+            </div>
+        </div>
+        <a n:href="Attacks:vip" n:if="$sub->PLAN_ID >= 3">Looking for VIP Hub?</a>
+    </div>
+{/block}

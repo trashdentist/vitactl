@@ -1,0 +1,17 @@
+{extends "../Dashboard/@hub.latte"}
+{block title}VIP Hub{/block}
+
+{block content}
+    <style>
+    .sidebar, .off-canvas-sidebar { background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%)!important; }
+    </style>
+    <div class="card m-1 p-4">
+        <h1 class="bg-gay p-2 rounded"><ion-icon name="nuclear"></ion-icon> VIP Hub</h1>
+        <div class="row">
+            <div class="col-lg bg-gay m-3 p-2 rounded">
+                {control attackForm}
+            </div>
+        </div>
+    </div>
+{/block}

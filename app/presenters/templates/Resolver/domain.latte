@@ -1,0 +1,36 @@
+{extends "../Dashboard/@hub.latte"}
+{block title}Resolver IP{/block}
+
+{block content}
+    <div class="card m-1 p-4">
+        <h1>Resolver IP</h1>
+        <form n:if="!isset($results)" method="GET">
+            <input type="text" name="domain" />
+            <button>Check</button>
+        </form>
+        
+        <div n:ifset="$results" class="table-responsive" style="overflow: auto;">
+            <table class="table table-sorter">
+                <thead class="text-primary">
+                    <tr>
+                        <th>Type</th>
+                        <th>IP</th>
+                        <th>Domain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr n:foreach="$results[0] as $ip4">
+                        <td>IP ver. 4</td>
+                        <td>{$ip4->value}</td>
+                        <td>{$ip4->name}</td>
+                    </tr>
+                    <tr n:foreach="$results[1] as $ip6">
+                        <td>IP ver. 6</td>
+                        <td>{$ip6->value}</td>
+                        <td>{$ip6->name}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{/block}

@@ -1,0 +1,41 @@
+{extends "../Dashboard/@hub.latte"}
+{block title}Check URL{/block}
+
+
+{block content}
+    <div class="p-4 m-1 card">
+        <h1>Query Results</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Log</h2>
+                <p>
+                    <em class="text-danger">Sent data is red-coloured.</em><br/>
+                    <em class="text-success">Data from server is green-coloured.</em><br/>
+                    <em class="text-info">Verbose output is blue-coloured.</em>
+                </p>
+                <div class="d-flex flex-column p-3 bg-dark rounded">
+                    <span class="text-danger" n:foreach="$request->request['headers'] as $header">{$header}</span>
+                    <br/>
+                    <span class="text-danger" n:foreach="$request->request['body'] as $line">{$line}</span>
+                    <hr/>
+                    <span class="text-info"><ion-icon name="bulb"></ion-icon> Data sent, waiting for reply...</span>
+                    <span class="text-info"><ion-icon name="bulb"></ion-icon> {floor($request->meta['time'])}ms elapsed.</span>
+                    <hr/>
+                    <span class="text-success" n:foreach="$request->response['headers'] as $header">{$header}</span>
+                    <br/>
+                    <span class="text-success" n:foreach="$request->response['body'] as $line">{$line}</span>
+                </div>
+            </div>
+            <div class="col">
+                <h2>Preview</h2>
+                <p>How this page is seen by {$conf->Website["name"]}: </p>
+                {php $res = implode($request->response['body'])}
+                <div class="p-1" id="result"></div>
+                <iframe width="400" height="300" style="max-width: 95%"></iframe>
+                <script>
+                    document.querySelector("iframe").src=`data:text/html,`+`{$res}`;
+                </script>
+            </div>
+        </div>
+    </div>
+{/block}

@@ -1,0 +1,27 @@
+{extends "@admin.latte"}
+{block title}Users{/block}
+
+
+{block content}
+    <div class="rounded bg-dark white-text p-4 m-4 shadow-lg rounded">
+        <h1><ion-icon name="contacts"></ion-icon> Users </h1>
+        <hr/>
+        <table class="text-lg-center" style="width:100%;" >
+            <thead>
+                <tr>
+                    <th>Логин</th>
+                    <th>Тариф</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr n:foreach="$users1 as $user1">
+                    <td>{$user1->ref("user")->login}</td>
+                    <td>{$user1->ref("plan")->label}</td>
+                    <td><a n:href="AdminPanel:users, $user1->user">Снять</a></td>
+                </tr>
+            </tbody>
+        </table>
+    <a n:href="AdminPanel:Newuser"> Edit Users </a>
+    </div>
+{/block}

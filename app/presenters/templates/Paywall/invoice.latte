@@ -1,0 +1,82 @@
+<div class="card rounded m-3 p-4">
+    <div class="card-header d-flex justify-content-between">
+        <h1>Invoice <span n:ifset="$id">№{$id}</span></h1>
+        <h1 n:class="$paid ? 'bg-success' : 'bg-danger'">{$paid ? "PAID" : "UNPAID"}</h1>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm">
+                <h4>From</h4>
+                <div class="table-responsive" style="overflow: auto;">
+                    <table class="table tablesorter">
+                        <tbody>
+                            <tr>
+                                <td>Name</td>
+                                <td>{$conf->Website["name"]}</td>
+                            </tr>
+                            <tr>
+                                <td>E-Mail</td>
+                                <td>billing@{$_SERVER["HTTP_HOST"]}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h4>To</h4>
+                <div class="table-responsive" style="overflow: auto;">
+                    <table class="table tablesorter">
+                        <tbody>
+                            <tr>
+                                <td>Name</td>
+                                <td>{$name}</td>
+                            </tr>
+                            <tr>
+                                <td>E-Mail</td>
+                                <td>{$email}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <h4>Summary</h4>
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive" style="overflow: auto;">
+                    <table class="table tablesorter">
+                        <thead class="text-primary">
+                            <tr>
+                                <th>Item</th>
+                                <th>Billing Cycle</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{$plan->label} 1 month subscription</td>
+                                <td>Monthly</td>
+                                <td>${$plan->price}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div align="right" class="col d-flex flex-column">
+                <span><strong>Subtotal</strong>: ${$plan->price}</span>
+                <span><strong>Discount</strong>: $0.00</span>
+                <h5>Total due: ${$plan->price}</h5>
+            </div>
+        </div>
+        <div n:ifset="$externalID" class="text-center">
+            <hr/>
+            <a n:if="!$paid" href="https://checkout.opennode.co/a" class="btn btn-success"><ion-icon name="cart"></ion-icon> Pay</a>
+            <hr/>
+            <img src="https://www.opennode.co/images/logo-with-text-white.svg" alt="OpenNode" />
+            <p>All payments go through our payment processor OpenNode.</p>
+        </div>
+    </div>
+</div>

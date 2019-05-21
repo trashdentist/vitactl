@@ -1,0 +1,75 @@
+{extends "../Dashboard/@hub.latte"}
+{block title}My attacks{/block}
+
+{block content}
+    <div class="card p-4 m-1">
+        <h1 сlass="m-2 p-3 border rounded">Attacks</h1>
+        <section сlass="m-2 p-3 border rounded">
+            <ul class="nav nav-pills" id="tabController" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="active-tab" data-toggle="tab" href="#active" role="tab" aria-controls="active" aria-selected="false">Active</a>
+                </li>
+            </ul>
+            <hr/>
+            <div class="tab-content" id="myTabContent">
+                <section class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                    <table class="dt" style="width:100%; overflow-x: auto;">
+                        <thead>
+                            <tr>
+                                <th>UUID</th>
+                                <th>Target</th>
+                                <th>Server</th>
+                                <th>Method</th>
+                                <th>Duration</th>
+                                <th>Launched</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr n:foreach="$attacks as $attack">
+                                <td>{$attack->id}</td>
+                                <td>{$attack->target}</td>
+                                <td n:if="!is_null($attack->machine)">{$attack->ref('machines', 'machine')->label}</td>
+                                <td n:if="is_null($attack->machine)"><em>Unknown</em></td>
+                                <td n:if="!is_null($attack->type)">{$attack->ref('methods', 'type')->label}</td>
+                                <td n:if="is_null($attack->type)"><em>Unknown</em></td>
+                                <td n:if="$attack->duration != 0">{$attack->duration} secs</td>
+                                <td n:if="$attack->duration == 0"><em>Canceled by user</em></td>
+                                <td n:if="$attack->duration != 0">{date("D, d M o \| h:i A \(T\)", $attack->begin)}</td>
+                                <td n:if="$attack->duration == 0"><em>Canceled by user</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <div class="tab-pane fade" id="active" role="tabpanel" aria-labelledby="active-tab">
+                    <table class="dt" style="width:100%; overflow-x: auto;">
+                        <thead>
+                            <tr>
+                                <th>Target</th>
+                                <th>Duration</th>
+                                <th>Launched</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr n:foreach="$lv_attacks as $attack">
+                                {php $live = true;}
+                                <td>{$attack->target}</td>
+                                <td>{$attack->duration} secs</td>
+                                <td>{date("D, d M o \| h:i A \(T\)", $attack->begin)}</td>
+                                <td class="d-flex">
+                                    <a n:href="halt, $attack->id" class="btn btn-danger"><ion-icon name="hand"></ion-icon> Stop</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr/>
+                    <small>Bulk actions: </small>
+                    <a n:ifset="$live" n:href="haltAll" class="btn btn-danger"><ion-icon name="flash-off"></ion-icon> Stop all</a>
+                </section>
+            </div>
+        </section>
+    </div>
+{/block}

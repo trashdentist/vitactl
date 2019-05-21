@@ -1,0 +1,15 @@
+{extends "@admin.latte"}
+{block title}Add User{/block}
+
+{block content}
+    <div class="bg-dark white-text p-4 m-4 shadow-lg rounded">
+        <h1>New user</h1>
+        <div class="row">
+            <div class="col-lg bg-gay m-3 p-2 rounded">
+        	{control useraddForm}
+            </div>
+             ** add - new user in membership<br>
+        	** change - change membership for user
+        </div>
+    </div>
+{/block}

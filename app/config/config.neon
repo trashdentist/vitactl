@@ -1,0 +1,44 @@
+#
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# https://nette.org/security-warning
+#
+parameters:
+    eventServer: "***"
+    eventPort: 5672
+    eventUsername: '***'
+    eventPassword: '***'
+    eventLobby: general_pool
+    eventTag: pool
+
+application:
+    errorPresenter: Error
+    catchExceptions: false
+    mapping:
+        *: App\*Module\Presenters\*Presenter
+
+
+session:
+    expiration: 14 days
+
+database:
+    dsn: '***:***=***.***.***;***=***'
+    user: ***
+    password: "***"
+
+extensions:
+    recaptcha: Contributte\ReCaptcha\DI\ReCaptchaExtension
+
+recaptcha:
+    secretKey: "***"
+    siteKey: "***"
+
+services:
+    - App\Forms\FormFactory
+    - App\Models\AttackManager
+    - App\Models\ServerManager
+    - App\Models\NewsManager
+    - App\Models\MembershipManager
+    router: App\Router\RouterFactory::createRouter
+    authenticator: App\Authenticator
+    eventing:
+        factory: App\Events\EventManager(%eventServer%, %eventPort%, %eventUsername%, %eventPassword%, %eventLobby%, %eventTag%)

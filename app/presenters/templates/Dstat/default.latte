@@ -1,0 +1,23 @@
+{extends "../Dashboard/@hub.latte"}
+{block title}DStat{/block}
+
+{block content} 
+    <div class="row">
+        <h1 class="col m-2 p-3 rounded card">DStat</h1>
+    </div>
+    <div class="row">
+        <div class="col-md m-2 p-3 rounded card d-flex flex-column">
+            <h2>Internap</h2>
+            <canvas id="inap-chart" style="max-height:130pt;"></canvas>
+            <strong>http://70.42.132.113/HIT</strong>
+        </div>
+        <div class="col-md m-2 p-3 rounded card d-flex flex-column" id="1">
+            <h2>China Telecom</h2>
+            <canvas id="nfo-chart" style="max-height:130pt;"></canvas>
+            <strong></strong>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js" integrity="sha256-oSgtFCCmHWRPQ/JmR4OoZ3Xke1Pw4v50uh6pLcu+fIc=" crossorigin="anonymous"></script>
+    <script src="/assets/javascripts/dstat.js"></script>
+{/block}

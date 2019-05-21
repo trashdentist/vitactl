@@ -1,0 +1,57 @@
+{extends "../Dashboard/@hub.latte"}
+{block title}Plans{/block}
+
+{block content}
+    <div class="card m-1 p-4">
+        <h1>Plans</h1>
+        <section class="table-responsive">
+            <table class="table tablesorter">
+                <thead class="text-primary">
+                    <tr>
+                        <th>Name</th>
+                        <th>Time</th>
+                        <th>Threads</th>
+                        <th>Specials</th>
+                        <th>Price</th>
+                        <th>Buy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Starter</td>
+                        <td>1800 seconds</td>
+                        <td>Two</td>
+                        <td>-</td>
+                        <td>$15</td>
+                        <td>
+                           <!-- <a n:href="buy, 1" rel="nofollow" class="btn btn-warning"><ion-icon name="flash"></ion-icon> Buy</a> or -->
+                            <a href="http://t.me/bfbypass" rel="nofollow"><ion-icon name="send"></ion-icon> Telegram</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Advantage</td>
+                        <td>3600 seconds</td>
+                        <td>Two</td>
+                        <td>Apache 2.2 Exploits</td>
+                        <td>$25</td>
+                        <td>
+                         <!--   <a n:href="buy, 2" rel="nofollow" class="btn btn-warning"><ion-icon name="flash"></ion-icon> Buy</a> or -->
+                            <a href="http://t.me/bfbypass" rel="nofollow"><ion-icon name="send"></ion-icon> Telegram</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>VIP</td>
+                        <td>5000 seconds</td>
+                        <td>Three</td>
+                        <td>Deucalion</td>
+                        <td>$<del>110</del> <strong>100</strong> <span class="badge badge-success">-10%</span></td>
+                        <td>
+                          <!--  <a n:href="buy, 3" rel="nofollow" class="btn btn-warning"><ion-icon name="flash"></ion-icon> Buy</a> or -->
+                            <a href="http://t.me/bfbypass" rel="nofollow"><ion-icon name="send"></ion-icon> Telegram</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+{/block}

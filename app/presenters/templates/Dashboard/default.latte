@@ -1,0 +1,159 @@
+{extends "@hub.latte"}
+{block title}Dashboard{/block}
+
+
+{block content}
+    <div class="row my-2">
+        <div class="card col-sm m-2">
+            <div class="card-header">
+                <h5 class="card-category">TOTAL BOOTS</h5>
+                <h3 class="card-title"><ion-icon class="text-success" name="flash"></ion-icon> <span class="countup" id="_cup0">{$attacks}</span></h3>
+            </div>
+        </div>
+        <div class="card col-sm m-2">
+            <div class="card-header">
+                <h5 class="card-category">RUNNING ATTACKS</h5>
+                <h3 class="card-title"><ion-icon class="text-primary" name="flame"></ion-icon> <span class="countup" id="_cup1">{$lv_attacks}</span></h3>
+            </div>
+        </div>
+        <div class="card col-sm m-2">
+            <div class="card-header">
+                <h5 class="card-category">ONLINE SERVERS</h5>
+                <h3 class="card-title"><ion-icon class="text-info" name="albums"></ion-icon> <span class="countup" id="_cup2">{$machines}</span></h3>
+            </div>
+        </div>
+        <div class="card col-sm m-2">
+            <div class="card-header">
+                <h5 class="card-category">TOTAL USERS</h5>
+                <h3 class="card-title"><ion-icon class="text-warning" name="flash"></ion-icon> <span class="countup" id="_cup3">{$users}</span></h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="advertisement card m-2 col-sm">
+            <div class="card-header">
+                <h3 class="card-title">ADS</h3>
+            </div>
+            <div class="card-body">
+                <div class="text-center">
+                    <a href="//t.me/SpectTeam" rel="nofollow">
+                        <img class="m-2" src="/assets/images/Primer.gif" alt="a" style="width: 90%; max-width: 358px;" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="advertisement card m-2 col-sm">
+            <div class="card-header">
+                <h3 class="card-title">+{$user->getIdentity()->getData()['username']}</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" style="overflow: auto;">
+                    <table class="table tablesorter">
+                        <tbody n:if="!is_null($sub)">
+                            <tr>
+                            	<td>Subscription status</td>
+                            	<td><span n:class="$sub->STATUS ? 'text-success' : 'text-warning'">{$sub->STATUS ? "Active" : "Limited"}</span></td>
+                            </tr>
+                            <tr>
+                            	<td>Plan</td>
+                            	<td>{$sub->PLAN_NAME}</td>
+                            </tr>
+                            <tr>
+                            	<td>Allowed time</td>
+                            	<td>{$sub->TIME}</td>
+                            </tr>
+                            <tr>
+                            	<td>Usage</td>
+                            	<td>{$sub->THREADS - $sub->REMAINING} / {$sub->THREADS}</td>
+                            </tr>
+                        </tbody>
+                        <tbody n:if="is_null($sub)">
+                            <tr>
+                            	<td>Subscription status</td>
+                            	<td><span class="text-danger">Inactive</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row my-2">
+        <div class="card col-sm m-2">
+            <div class="card-header">
+                <h3 class="card-title">NEWS</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" style="overflow: auto;">
+                    <table class="table tablesorter">
+                        <thead class="text-primary">
+                            <tr>
+                                <th>HEADLINE</th>
+                                <th>CONTENT</th>
+                                <th>DATE</th>
+                                <th>AUTHOR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr n:foreach="$news as $pub">
+                                <td>{$pub->title}</td>
+                                <td>{$pub->content}</td>
+                                <td>{date("d M o", strtotime($pub->date))}</td>
+                                <td>{$pub->ref('users', 'author')->login}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card col-sm m-2">
+            <div class="card-header">
+                <h3 class="card-title">CHAT</h3>
+            </div>
+            <div class="card-body">
+                <p class="text-center"><ion-icon name="alert"></ion-icon></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row my-2">
+        <div class="card col-sm-7 m-2">
+            <div class="card-header">
+                <h3 class="card-title">LIVE ATTACK MAP</h3>
+            </div>
+            <div class="card-body">
+                <iframe id="map" src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" frameborder="0" width=1000 height=400 style="max-width:95%;"></iframe>
+            </div>
+        </div>
+        <div class="card col-sm m-2">
+            <div class="card-header">
+                <h3 class="card-title">SERVER STATUS</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" style="overflow: auto;overflow-y:scroll;max-height:400px;">
+                    <table class="table tablesorter">
+                        <thead class="text-primary">
+                            <tr>
+                                <th>NAME</th>
+                                <th>SLOTS</th>
+                                <th>ONLINE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr n:foreach="$machinesL as $server">
+                                <td>{$server->label}</td>
+                                <td>{$server->slots}</td>
+                                <td>
+                                    <ion-icon n:if="$server->active" class="text-success" name="checkmark-circle"></ion-icon>
+                                    <ion-icon n:if="!$server->active" class="text-danger" name="alert"></ion-icon>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

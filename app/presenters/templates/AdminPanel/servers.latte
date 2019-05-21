@@ -1,0 +1,36 @@
+{extends "@admin.latte"}
+{block title}Управления серверами{/block}
+
+
+{block content}
+    <div class="rounded bg-dark white-text p-4 m-4 shadow-lg rounded">
+        <h1><ion-icon name="laptop"></ion-icon> Сервера</h1><a n:href="addserver">Добавить сервер</a>
+        <hr/>
+        <table class="text-lg-center" style="width:100%;" >
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Слоты</th>
+                    <th>Методы</th>
+                    <th>Состояние</th>
+                    <th>Подробнее</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr n:foreach="$servers as $serv">
+                    <td>{$serv->id}</td>
+                    <td>{$serv->label}</td>
+                    <td>{$serv->slots}</td>
+                    <td>{$serv->methods}</td>
+                    {if $serv->active === 1}
+                    <td>Включен</td>
+                    {else}
+                    <td>Отключен</td>
+                    {/if}
+                    <td><a n:href="AdminPanel:servers, $serv->id">Клик</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{/block}

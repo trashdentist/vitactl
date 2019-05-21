@@ -1,0 +1,30 @@
+{extends "@admin.latte"}
+{block title}Редактирование объявлений{/block}
+
+
+{block content}
+    <div class="bg-dark white-text p-4 m-4 shadow-lg rounded">
+        <h1><ion-icon name="contacts"></ion-icon> Объявления</h1>
+        <hr/>
+        <table class="text-lg-center" style="width:100%;" >
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Author</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr n:foreach="$news as $news_all">
+                    {if $news_all->deleted === 1}<td>Deleted</td>{else}<td>Active</td>{/if}
+                    <td>{$news_all->title}</td>
+                    <td>{$news_all->content}</td>
+                    <td>{$news_all->ref("author")->login}</td>
+                    <td><a n:href="AdminPanel:news, $news_all->id">Edit</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{/block}

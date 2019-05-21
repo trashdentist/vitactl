@@ -1,0 +1,11 @@
+{extends "../Dashboard/@hub.latte"}
+{block title}Instant order{/block}
+
+{block content}
+    {include "invoice.latte", plan => $plan, name => "—", email => "—", date => time(), paid => false}
+    <div class="card rounded m-3 p-4">
+        <h1>Checkout</h1>
+        <p>Does the invoice upside looks good? Great! Now please fill in the form to checkout.</p>
+        {control invoiceForm}
+    </div>
+{/block}
